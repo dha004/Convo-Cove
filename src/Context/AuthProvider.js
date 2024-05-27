@@ -1,13 +1,14 @@
 import React, { useState } from 'react';
-import { useHistory } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import { auth } from '../Firebase/config';
 import { Spin } from 'antd';
 
 export const AuthContext = React.createContext();
 
 export default function AuthProvider({ children }) {
+    const navigate = useNavigate();
     const [user, setUser] = useState({});
-    const history = useHistory();
+    // const history = useHistory();
     const [isLoading, setIsLoading] = useState(true);
 
     React.useEffect(() => {
@@ -21,21 +22,19 @@ export default function AuthProvider({ children }) {
                     photoURL,
                 });
                 setIsLoading(false);
-                history.push('/');
+                navigate('/');
                 return;
             }
 
-            // reset user info
             setUser({});
             setIsLoading(false);
-            history.push('/login');
+            navigate('/login');
         });
 
-        // clean function
         return () => {
             unsubscribed();
         };
-    }, [history]);
+    }, []);
 
     return (
         <AuthContext.Provider value={{ user }}>

@@ -1,19 +1,23 @@
-import firebase, { db } from './config';
+import { collection, addDoc } from 'firebase/firestore';
+import { db } from './config';
+import { serverTimestamp } from 'firebase/firestore';
 
-export const addDocument = (collection, data) => {
-    const query = db.collection(collection);
 
-    query.add({
-        ...data,
-        createdAt: firebase.firestore.FieldValue.serverTimestamp(),
-    });
+export const addDocument = async (collectionName, data) => {
+    try {
+        const docRef = await addDoc(collection(db, collectionName), {
+            ...data,
+            createdAt: serverTimestamp(),
+        });
+        console.log('Document written with ID: ', docRef.id); 
+    } catch (error) {
+        console.error('Error adding document: ', error); 
+    }
 };
 
 
 export const generateKeywords = (displayName) => {
-
     const name = displayName.split(' ').filter((word) => word);
-
     const length = name.length;
     let flagArray = [];
     let result = [];

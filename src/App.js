@@ -1,6 +1,6 @@
 import './App.css';
 import Login from './components/Login';
-import { Route, Switch, BrowserRouter } from 'react-router-dom';
+import { Route, Routes, BrowserRouter } from 'react-router-dom';
 import ChatRoom from './components/ChatRoom';
 import AuthProvider from './Context/AuthProvider';
 import AppProvider from './Context/AppProvider';
@@ -12,10 +12,10 @@ function App() {
     <BrowserRouter>
       <AuthProvider>
         <AppProvider>
-          <Switch>
-            <Route component={Login} path='/login' />
-            <Route component={ChatRoom} path='/' />
-          </Switch>
+          <Routes>
+            <Route path='/login' element={<Login />} />
+            <Route path='/' element={<ChatRoom />} />
+          </Routes>
           <AddRoomModal />
           <InviteMemberModal />
         </AppProvider>

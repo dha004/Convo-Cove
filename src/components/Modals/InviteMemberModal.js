@@ -2,29 +2,21 @@ import React, { useContext, useState } from 'react';
 import { Form, Modal, Select, Spin, Avatar } from 'antd';
 import { AppContext } from '../../Context/AppProvider';
 import { debounce } from 'lodash';
+import { collection, query, where, orderBy, limit, getDocs } from 'firebase/firestore';
 import { db } from '../../Firebase/config';
-import { query, collection, where, orderBy, limit, getDocs } from 'firebase/firestore';
 
-function DebounceSelect({
-    fetchOptions,
-    debounceTimeout = 300,
-    curMembers,
-    ...props
-}) {
-    // Search: abcddassdfasdf
-
+function DebounceSelect({ fetchOptions, debounceTimeout = 300, curMembers, ...props }) {
     const [fetching, setFetching] = useState(false);
     const [options, setOptions] = useState([]);
 
     const debounceFetcher = React.useMemo(() => {
-        const loadOptions = (value) => {
+        const loadOptions = async (value) => {
             setOptions([]);
             setFetching(true);
 
-            fetchOptions(value, curMembers).then((newOptions) => {
-                setOptions(newOptions);
-                setFetching(false);
-            });
+            const newOptions = await fetchOptions(value, curMembers);
+            setOptions(newOptions);
+            setFetching(false);
         };
 
         return debounce(loadOptions, debounceTimeout);
@@ -32,7 +24,6 @@ function DebounceSelect({
 
     React.useEffect(() => {
         return () => {
-            // clear when unmount
             setOptions([]);
         };
     }, []);
@@ -57,7 +48,7 @@ function DebounceSelect({
     );
 }
 
-const fetchUserList = await (search, curMembers); {
+const fetchUserList = async (search, curMembers) => {
     try {
         const q = query(
             collection(db, 'users'),
@@ -78,32 +69,25 @@ const fetchUserList = await (search, curMembers); {
             });
         });
 
-        // Filter out current members
-        //return userList.filter((opt) => !curMembers.includes(opt.value));
+
+        return userList.filter((opt) => !curMembers.includes(opt.value));
     } catch (error) {
         console.error('Error fetching user list:', error);
-        //return [];
+        return [];
     }
 };
 
 export default function InviteMemberModal() {
-    const {
-        isInviteMemberVisible,
-        setIsInviteMemberVisible,
-        selectedRoomId,
-        selectedRoom,
-    } = useContext(AppContext);
+    const { isInviteMemberVisible, setIsInviteMemberVisible, selectedRoomId, selectedRoom } = useContext(AppContext);
+    
     const [value, setValue] = useState([]);
     const [form] = Form.useForm();
 
     const handleOk = () => {
-        // reset form value
         form.resetFields();
         setValue([]);
 
-        // update members in current room
         const roomRef = db.collection('rooms').doc(selectedRoomId);
-
         roomRef.update({
             members: [...selectedRoom.members, ...value.map((val) => val.value)],
         });
@@ -112,7 +96,6 @@ export default function InviteMemberModal() {
     };
 
     const handleCancel = () => {
-        // reset form value
         form.resetFields();
         setValue([]);
 
@@ -122,10 +105,10 @@ export default function InviteMemberModal() {
     return (
         <div>
             <Modal
-                title='Invite more members'
-                visible={isInviteMemberVisible}
-                onOk={handleOk}
-                onCancel={handleCancel}
+                title='Invite more members' 
+                visible={isInviteMemberVisible} 
+                onOk={handleOk} 
+                onCancel={handleCancel} 
                 destroyOnClose={true}
             >
                 <Form form={form} layout='vertical'>
@@ -135,7 +118,7 @@ export default function InviteMemberModal() {
                         label='Members Name'
                         value={value}
                         placeholder='Enter member name'
-                        fetchOptions={fetchUserList}
+                        fetchOptions={fetchUserList} 
                         onChange={(newValue) => setValue(newValue)}
                         style={{ width: '100%' }}
                         curMembers={selectedRoom.members}
@@ -145,3 +128,4 @@ export default function InviteMemberModal() {
         </div>
     );
 }
+

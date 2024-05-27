@@ -4,9 +4,10 @@ import styled from 'styled-components';
 import { Button, Tooltip, Avatar, Form, Input, Alert } from 'antd';
 import Message from './Message';
 import { AppContext } from '../../Context/AppProvider';
-import { addDocument } from '../../Firebase/services';
+import { addDoc, collection } from 'firebase/firestore';
 import { AuthContext } from '../../Context/AuthProvider';
 import useFirestore from '../../Hooks/useFirestore';
+import { db } from '../../Firebase/config';
 
 const HeaderStyled = styled.div`
   display: flex;
@@ -71,22 +72,18 @@ const MessageListStyled = styled.div`
 `;
 
 export default function ChatWindow() {
-    const { selectedRoom, members, setIsInviteMemberVisible } =
-        useContext(AppContext);
-    const {
-        user: { uid, photoURL, displayName },
-    } = useContext(AuthContext);
+    const { selectedRoom, members, setIsInviteMemberVisible } = useContext(AppContext);
+    const { user: { uid, photoURL, displayName } } = useContext(AuthContext);
     const [inputValue, setInputValue] = useState('');
     const [form] = Form.useForm();
     const inputRef = useRef(null);
     const messageListRef = useRef(null);
-
     const handleInputChange = (e) => {
         setInputValue(e.target.value);
     };
 
     const handleOnSubmit = () => {
-        addDocument('messages', {
+        addDoc(collection(db, 'messages'), {
             text: inputValue,
             uid,
             photoURL,
@@ -95,8 +92,6 @@ export default function ChatWindow() {
         });
 
         form.resetFields(['message']);
-
-        // focus to input again after submit
         if (inputRef?.current) {
             setTimeout(() => {
                 inputRef.current.focus();
@@ -104,22 +99,17 @@ export default function ChatWindow() {
         }
     };
 
-    const condition = React.useMemo(
-        () => ({
-            fieldName: 'roomId',
-            operator: '==',
-            compareValue: selectedRoom.id,
-        }),
-        [selectedRoom.id]
-    );
+    const condition = React.useMemo(() => ({
+        fieldName: 'roomId',
+        operator: '==',
+        compareValue: selectedRoom.id,
+    }), [selectedRoom.id]);
 
     const messages = useFirestore('messages', condition);
 
     useEffect(() => {
-        // scroll to bottom after message changed
         if (messageListRef?.current) {
-            messageListRef.current.scrollTop =
-                messageListRef.current.scrollHeight + 50;
+            messageListRef.current.scrollTop = messageListRef.current.scrollHeight + 50;
         }
     }, [messages]);
 
@@ -140,15 +130,13 @@ export default function ChatWindow() {
                                 type='text'
                                 onClick={() => setIsInviteMemberVisible(true)}
                             >
-                                Mời
+                                Invite
                             </Button>
                             <Avatar.Group size='small' maxCount={2}>
                                 {members.map((member) => (
                                     <Tooltip title={member.displayName} key={member.id}>
                                         <Avatar src={member.photoURL}>
-                                            {member.photoURL
-                                                ? ''
-                                                : member.displayName?.charAt(0)?.toUpperCase()}
+                                            {member.photoURL ? '' : member.displayName?.charAt(0)?.toUpperCase()}
                                         </Avatar>
                                     </Tooltip>
                                 ))}
@@ -196,3 +184,4 @@ export default function ChatWindow() {
         </WrapperStyled>
     );
 }
+
