@@ -2,7 +2,7 @@
 
 Live Demo: https://main--dancing-kelpie-62e069.netlify.app
 
-ConvoCove is a real-time chat application facilitating private and group conversations with others. The front-end user interface will be developed in React, and the supporting backend services will utilize Firebase.
+ConvoCove is a real-time chat application facilitating private and group conversations with others. The system leverages React for building a responsive user interface and Firebase for backend services, including authentication, data storage, and real-time updates
 
 
 ## Available Scripts
