@@ -1,5 +1,8 @@
 # Convo-Cove
-
+## Table of Contents
+* [General info] (#general-info)
+* [Technologies] (#technologies)
+* [Setup] (#setup)
 ConvoCove is a real-time chat application facilitating private and group conversations with others. The system leverages React for building a responsive user interface and Firebase for backend services, including authentication, data storage, and real-time updates
 
 Features:
