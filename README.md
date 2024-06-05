@@ -25,10 +25,15 @@ User Authentication: Register and log in to your account securely with Firebase 
 ## Technologies
 
 Create-React-App
+
 Firebase
+
 React-router-dom
+
 Styled components
+
 Ant Design
+
 Netlify
 
 ## Technology Stack
