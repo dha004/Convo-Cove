@@ -3,13 +3,17 @@
 ## Table of Contents
 * General Info
 * Features
+* Technologies
 * Technology Stack
 * Live Demo
+* Testing
+* Requirements Fulfillment
+* Architectural Compliance
   
 ## General Info
 ConvoCove is a real-time chat application facilitating private and group conversations with others. The system leverages React for building a responsive user interface and Firebase for backend services, including authentication, data storage, and real-time updates
 
-## Features:
+## Features
 
 Real-time Chatting: Send and receive messages in real time. Whether it’s a private conversation or a group discussion, you’ll never miss a beat.
 
@@ -18,15 +22,53 @@ Group Conversations: Create group chats to communicate with multiple users at on
 Private Conversations: Have one-on-one conversations with other users. All chats are private and secure.
 User Authentication: Register and log in to your account securely with Firebase authentication.
 
-## Technology Stack:
+## Technologies
+
+Create-React-App
+Firebase
+React-router-dom
+Styled components
+Ant Design
+Netlify
+
+## Technology Stack
 
 Frontend: The user interface is built using React, a popular JavaScript library for building user interfaces. React’s component-based architecture allows for a modular and maintainable codebase.
 
 Backend: Firebase, a comprehensive app development platform, is used for backend services. It provides solutions for authentication, real-time databases, and cloud storage, among others.
 
-## Live Demo: 
+## Live Demo
 
 https://main--dancing-kelpie-62e069.netlify.app
+
+## Testing
+
+Our tests cover the following aspects:
+- Unit tests for individual components
+- Integration tests for combined components
+
+## Requirement Fulfillment
+
+We have made an effort to fulfill all requirements as outlined in the Software Requirements Specification (SRS). Here are some key points:
+
+**Performance Requirement**: The application should be capable of supporting up to 10 concurrent users without any degradation in performance, a requirement that ensures the application can handle multiple users simultaneously, a common scenario in group chats.
+
+**Safety Requirement**: The application must authenticate users before allowing them access to their accounts, a measure that prevents unauthorized access and protects user data.
+
+**Security Requirement**: The application is designed with a strong emphasis on data privacy and security, ensuring that user data is encrypted during both transmission and storage. It is committed to not sharing user data with third parties without explicit user consent.
+
+## Architecture Compliance
+
+We have adhered to the architectural design specified in the Software Design and Architecture Document (SDAD). Here are some highlights:
+
+**Usability**: In order to maintain our focus on usability and iterate smoothly on our user interface, we will be using React and Firebase to ensure the operation of the database to store the chat history and any other available data that are transmitted from the user input. 
+
+**Availability**: ConvoCove developed a strong database, ensuring that resources can be allocated to provide increasing user demands. Additionally, the monitoring and maintenance further support availability, and allow ConvoCove to execute and address any arising issues to ensure continuous service.
+
+**Maintainability**: To facilitate seamless updates and enhancements, the architecture uses the practice of code organization and documentation. Components and services are modularized to promote reusability and independent development, boosting the response to changing environments. 
+
+**Testability**: The platform employs comprehensive testing strategies such as unit tests and integration tests. Unit tests verify the behavior of individual components and services. Integration tests validate the interaction between different layers of architecture. Mock data and simulated environment replicate real work scenarios and allow testing under controlled consciousness. 
+
 
 ## Available Scripts
 
@@ -37,60 +79,3 @@ In the project directory, you can run:
 Runs the app in the development mode.\
 Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
-
-### `npm test`
-
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
-
-### `npm run build`
-
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
-
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
-
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
-
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
