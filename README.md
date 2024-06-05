@@ -1,9 +1,23 @@
 # Convo-Cove
 
-Live Demo: https://main--dancing-kelpie-62e069.netlify.app
-
 ConvoCove is a real-time chat application facilitating private and group conversations with others. The system leverages React for building a responsive user interface and Firebase for backend services, including authentication, data storage, and real-time updates
 
+Features:
+
+Real-time Chatting: Send and receive messages in real time. Whether it’s a private conversation or a group discussion, you’ll never miss a beat.
+
+Group Conversations: Create group chats to communicate with multiple users at once. Ideal for team collaborations, family chats, and more.
+
+Private Conversations: Have one-on-one conversations with other users. All chats are private and secure.
+User Authentication: Register and log in to your account securely with Firebase authentication.
+
+Technology Stack:
+
+Frontend: The user interface is built using React, a popular JavaScript library for building user interfaces. React’s component-based architecture allows for a modular and maintainable codebase.
+
+Backend: Firebase, a comprehensive app development platform, is used for backend services. It provides solutions for authentication, real-time databases, and cloud storage, among others.
+
+Live Demo: https://main--dancing-kelpie-62e069.netlify.app
 
 ## Available Scripts
 
