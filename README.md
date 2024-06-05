@@ -1,7 +1,7 @@
 # Convo-Cove
 
 ## Table of Contents
-* [General info] (#general-info)
+* [https://github.com/dha004/Convo-Cove#General-info] (#general-info)
 * Features
 * Technology Stack
 * Live Demo
